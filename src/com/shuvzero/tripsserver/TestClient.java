@@ -3,7 +3,7 @@ package com.shuvzero.tripsserver;
 import java.io.*;
 import java.net.*;
 
-public class EchoClient {
+public class TestClient {
 
     public static void main(String[] args) {
 

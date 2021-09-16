@@ -1,0 +1,4 @@
+- server should keep a list of current games
+
+- server should create a new game
+- server should generate random unique number and return it
