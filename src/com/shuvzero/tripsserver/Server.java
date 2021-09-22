@@ -2,10 +2,13 @@ package com.shuvzero.tripsserver;
 
 import java.net.*;
 import java.io.*;
+import java.util.Map;
 
 public class Server {
 
     public static final int PORT_NUMBER = 6667;
+
+    //private Map<Integer, Game> games;
 
     public static void main(String[] args) {
         Server server = new Server();

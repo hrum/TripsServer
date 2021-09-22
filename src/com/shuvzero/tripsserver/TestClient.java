@@ -3,20 +3,21 @@ package com.shuvzero.tripsserver;
 import java.io.*;
 import java.net.*;
 
+import static com.shuvzero.tripsserver.Server.PORT_NUMBER;
+
 public class TestClient {
 
     public static void main(String[] args) {
 
         String hostName = "localhost";
-        int portNumber = 6667;
 
         try (
-            Socket socket = new Socket(hostName, portNumber);
+            Socket socket = new Socket(hostName, PORT_NUMBER);
             PrintWriter toServer = new PrintWriter(socket.getOutputStream(), true);
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             BufferedReader input = new BufferedReader(new InputStreamReader(System.in))
         ) {
-            System.out.println("Client is connecting to " + hostName + ":" + portNumber);
+            System.out.println("Client is connecting to " + hostName + ":" + PORT_NUMBER);
             String userInput;
             while ((userInput = input.readLine()) != null) {
                 System.out.println("Sending to server: " + userInput);

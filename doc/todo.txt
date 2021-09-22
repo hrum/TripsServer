@@ -1,4 +1,10 @@
-- server should keep a list of current games
+- create simple library
 
+
+- try to add another library
+- check packages
+- add library to the server
+
+- server should keep a list of current games
 - server should create a new game
 - server should generate random unique number and return it
