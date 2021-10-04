@@ -40,6 +40,7 @@ public class Server {
     }
 
     private String handle(String message) {
+        //in case of create game message - create new game and add it to the list
         return "test";
     }
 
