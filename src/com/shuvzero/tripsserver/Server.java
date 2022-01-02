@@ -1,5 +1,6 @@
 package com.shuvzero.tripsserver;
 
+import com.shuvzero.trips.lobby.Lobby;
 import com.shuvzero.trips.model.game.Game;
 
 import java.net.*;
@@ -10,11 +11,14 @@ public class Server {
 
     public static final int PORT_NUMBER = 6667;
 
+    private Map<Integer, Lobby> lobbies;
     private Map<Integer, Game> games;
 
     public static void main(String[] args) {
         Server server = new Server();
         server.start();
+        Lobby lobby = new Lobby();
+        //lobby
     }
 
     private void start() {
@@ -39,8 +43,12 @@ public class Server {
         }
     }
 
+    private void createNewLobby() {
+
+    }
+
     private String handle(String message) {
-        //in case of create game message - create new game and add it to the list
+        //in case of create game message - create new lobby and add it to the list
         return "test";
     }
 
