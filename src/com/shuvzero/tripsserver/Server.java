@@ -1,6 +1,7 @@
 package com.shuvzero.tripsserver;
 
 import com.shuvzero.trips.lobby.Lobby;
+import com.shuvzero.trips.message.Message;
 import com.shuvzero.trips.model.game.Game;
 
 import java.net.*;
@@ -17,8 +18,6 @@ public class Server {
     public static void main(String[] args) {
         Server server = new Server();
         server.start();
-        Lobby lobby = new Lobby();
-        //lobby
     }
 
     private void start() {
@@ -33,7 +32,7 @@ public class Server {
             String clientMessage;
             while ((clientMessage = fromClient.readLine()) != null) {
                 System.out.println("Received from client: " + clientMessage);
-                String serverMessage = handle(clientMessage);
+                Message serverMessage = handle(clientMessage);
                 System.out.println("Sending to client: " + serverMessage);
                 toClient.println(serverMessage);
             }
@@ -43,13 +42,14 @@ public class Server {
         }
     }
 
-    private void createNewLobby() {
-
+    private void createLobby() {
+        Lobby lobby = new Lobby();
+        //lobbies.put();
     }
 
-    private String handle(String message) {
-        //in case of create game message - create new lobby and add it to the list
-        return "test";
+    private Message handle(String message) {
+        //decode message
+        return null;
     }
 
 }
