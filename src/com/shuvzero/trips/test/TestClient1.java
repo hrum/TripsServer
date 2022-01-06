@@ -1,25 +1,21 @@
-package com.shuvzero.tripsserver;
+package com.shuvzero.trips.test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.*;
+import java.net.*;
 
-import static com.shuvzero.tripsserver.Server.PORT_NUMBER;
+import static com.shuvzero.trips.server.Server.PORT_NUMBER;
 
-public class TestClient2 {
+public class TestClient1 {
 
     public static void main(String[] args) {
 
         String hostName = "localhost";
 
         try (
-                Socket socket = new Socket(hostName, PORT_NUMBER);
-                PrintWriter toServer = new PrintWriter(socket.getOutputStream(), true);
-                BufferedReader fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                BufferedReader input = new BufferedReader(new InputStreamReader(System.in))
+            Socket socket = new Socket(hostName, PORT_NUMBER);
+            PrintWriter toServer = new PrintWriter(socket.getOutputStream(), true);
+            BufferedReader fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader input = new BufferedReader(new InputStreamReader(System.in))
         ) {
             System.out.println("Client is connecting to " + hostName + ":" + PORT_NUMBER);
             String userInput;

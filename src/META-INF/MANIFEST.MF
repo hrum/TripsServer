@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.shuvzero.tripsserver.Server
+Main-Class: com.shuvzero.trips.server.Server
 

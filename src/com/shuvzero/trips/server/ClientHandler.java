@@ -1,14 +1,13 @@
-package com.shuvzero.tripsserver;
+package com.shuvzero.trips.server;
 
 import com.shuvzero.trips.message.Message;
+import com.shuvzero.trips.message.TechMessage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
-
-import static com.shuvzero.tripsserver.Server.PORT_NUMBER;
 
 public class ClientHandler extends Thread {
 
@@ -31,13 +30,16 @@ public class ClientHandler extends Thread {
                 toClient.println(serverMessage);
             }
         } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port " + PORT_NUMBER + " or listening for a connection");
+            System.out.println("Exception caught when trying to handle client");
             System.out.println(e.getMessage());
         }
     }
 
-    private Message handle(String message) {
-        //decode message
+    private Message handle(String input) {
+        TechMessage message = (TechMessage) Message.decode(input);
+        System.out.println(message.getActionType());
+        System.out.println(message.getCode());
+        System.out.println(message.getPlayers());
         return null;
     }
 }
