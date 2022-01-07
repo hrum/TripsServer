@@ -1,18 +1,23 @@
 package com.shuvzero.trips.server;
 
 import com.shuvzero.trips.lobby.Lobby;
+import com.shuvzero.trips.lobby.Profile;
+import com.shuvzero.trips.message.Message;
 import com.shuvzero.trips.message.TechMessage;
 
 import java.net.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class Server {
 
     public static final int PORT_NUMBER = 6667;
     public static final int MIN_ID = 10000;
     public static final int MAX_ID = 99999;
+
+    private static final Random random = new Random();
 
 
     private Map<Integer, ServerGame> serverGames;
@@ -31,7 +36,7 @@ public class Server {
             while(true) {
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("New client is connected");
-                new ClientHandler(clientSocket).start();
+                new ClientHandler(this, clientSocket).start();
             }
         } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port " + PORT_NUMBER + " or listening for a connection");
@@ -39,19 +44,24 @@ public class Server {
         }
     }
 
-    private void createLobby(TechMessage message) {
-        Lobby lobby = new Lobby();
+    public Message createLobby(TechMessage message) {
         int id = generateId();
-        //lobbies.put(id, lobby);
-        //add player
+        Lobby lobby = new Lobby();
+        for(String name: message.getPlayers())
+        lobby.addProfile(new Profile(name, true));
+        serverGames.put(id, new ServerGame(lobby));
+
+        return null;
     }
 
     private int generateId() {
-        //do we need both lobbies and games?
-
-        //5 digits code
-        //check this code is not used yet
-        return 0;
+        for(int attempt = 0; attempt < 100; attempt++) {
+            int id = MIN_ID + random.nextInt(MAX_ID - MIN_ID + 1);
+            if (!serverGames.containsKey(id)) {
+                return id;
+            }
+        }
+        return -1;
     }
 
 }

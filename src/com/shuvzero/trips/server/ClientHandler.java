@@ -1,5 +1,6 @@
 package com.shuvzero.trips.server;
 
+import com.shuvzero.trips.message.ActionType;
 import com.shuvzero.trips.message.Message;
 import com.shuvzero.trips.message.TechMessage;
 
@@ -11,9 +12,11 @@ import java.net.Socket;
 
 public class ClientHandler extends Thread {
 
+    private Server server;
     private Socket clientSocket;
 
-    public ClientHandler(Socket clientSocket) {
+    public ClientHandler(Server server, Socket clientSocket) {
+        this.server = server;
         this.clientSocket = clientSocket;
     }
 
@@ -37,9 +40,11 @@ public class ClientHandler extends Thread {
 
     private Message handle(String input) {
         TechMessage message = (TechMessage) Message.decode(input);
-        System.out.println(message.getActionType());
-        System.out.println(message.getCode());
-        System.out.println(message.getPlayers());
+        switch (message.getActionType()) {
+            case CREATE_GAME:
+                server.createLobby(message);
+                break;
+        }
         return null;
     }
 }

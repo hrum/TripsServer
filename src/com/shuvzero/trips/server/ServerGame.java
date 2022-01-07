@@ -8,6 +8,10 @@ public class ServerGame {
     private Lobby lobby;
     private Game game;
 
+    public ServerGame(Lobby lobby) {
+        this.lobby = lobby;
+    }
+
     public Game getGame() {
         return game;
     }
