@@ -2,11 +2,13 @@ package com.shuvzero.trips.server;
 
 import com.shuvzero.trips.lobby.Lobby;
 import com.shuvzero.trips.lobby.Profile;
+import com.shuvzero.trips.message.ActionType;
 import com.shuvzero.trips.message.Message;
 import com.shuvzero.trips.message.TechMessage;
 
 import java.net.*;
 import java.io.*;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -44,14 +46,18 @@ public class Server {
         }
     }
 
-    public Message createLobby(TechMessage message) {
+    public Message createLobby(TechMessage input) {
         int id = generateId();
+        System.out.println("Generated id: " + id);
         Lobby lobby = new Lobby();
-        for(String name: message.getPlayers())
+        for(String name: input.getPlayers())
         lobby.addProfile(new Profile(name, true));
         serverGames.put(id, new ServerGame(lobby));
 
-        return null;
+        TechMessage response = new TechMessage(ActionType.CREATE_GAME);
+        response.setCode(id);
+        response.setPlayers(Collections.singletonList(Profile.DEFAULT_PLAYER_NAME));
+        return response;
     }
 
     private int generateId() {
