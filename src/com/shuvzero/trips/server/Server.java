@@ -3,8 +3,8 @@ package com.shuvzero.trips.server;
 import com.shuvzero.trips.lobby.Lobby;
 import com.shuvzero.trips.lobby.Profile;
 import com.shuvzero.trips.message.ActionType;
+import com.shuvzero.trips.message.LobbyMessage;
 import com.shuvzero.trips.message.Message;
-import com.shuvzero.trips.message.TechMessage;
 
 import java.net.*;
 import java.io.*;
@@ -46,7 +46,7 @@ public class Server {
         }
     }
 
-    public Message createLobby(TechMessage input) {
+    public Message createLobby(LobbyMessage input) {
         int id = generateId();
         System.out.println("Generated id: " + id);
         Lobby lobby = new Lobby();
@@ -54,7 +54,7 @@ public class Server {
         lobby.addProfile(new Profile(name, true));
         serverGames.put(id, new ServerGame(lobby));
 
-        TechMessage response = new TechMessage(ActionType.CREATE_GAME);
+        LobbyMessage response = new LobbyMessage(ActionType.CREATE_GAME);
         response.setCode(id);
         response.setPlayers(Collections.singletonList(Profile.DEFAULT_PLAYER_NAME));
         return response;

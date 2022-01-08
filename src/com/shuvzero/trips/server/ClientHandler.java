@@ -1,8 +1,9 @@
 package com.shuvzero.trips.server;
 
 import com.shuvzero.trips.message.ActionType;
+import com.shuvzero.trips.message.LobbyMessage;
 import com.shuvzero.trips.message.Message;
-import com.shuvzero.trips.message.TechMessage;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,7 +40,7 @@ public class ClientHandler extends Thread {
     }
 
     private Message handle(String input) {
-        TechMessage message = (TechMessage) Message.decode(input);
+        LobbyMessage message = (LobbyMessage) Message.decode(input);
         switch (message.getActionType()) {
             case CREATE_GAME:
                 server.createLobby(message);
