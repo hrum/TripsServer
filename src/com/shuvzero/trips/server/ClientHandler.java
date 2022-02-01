@@ -29,9 +29,9 @@ public class ClientHandler extends Thread {
             String clientMessage;
             while ((clientMessage = fromClient.readLine()) != null) {
                 System.out.println("Received from client: " + clientMessage);
-                Message serverMessage = handle(clientMessage);
-                System.out.println("Sending to client: " + serverMessage);
-                toClient.println(serverMessage);
+                String response = handle(clientMessage).encode();
+                System.out.println("Sending to client: " + response);
+                toClient.println(response);
             }
         } catch (IOException e) {
             System.out.println("Exception caught when trying to handle client");
@@ -41,10 +41,11 @@ public class ClientHandler extends Thread {
 
     private Message handle(String input) {
         LobbyMessage message = (LobbyMessage) Message.decode(input);
-        switch (message.getActionType()) {
-            case CREATE_GAME:
-                server.createLobby(message);
-                break;
+        if(message != null) {
+            switch (message.getActionType()) {
+                case CREATE_GAME:
+                    return server.createLobby(message);
+            }
         }
         return null;
     }

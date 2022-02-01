@@ -46,11 +46,12 @@ public class Server {
         }
     }
 
-    public Message createLobby(LobbyMessage input) {
+    public Message createLobby(LobbyMessage request) {
         int id = generateId();
         System.out.println("Generated id: " + id);
+
         Lobby lobby = new Lobby();
-        for(String name: input.getPlayers())
+        for(String name: request.getPlayers())
         lobby.addProfile(new Profile(name, true));
         serverGames.put(id, new ServerGame(lobby));
 
